@@ -1,10 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-neutral-800: #262626;
+  --color-indigo-500: #6366f1;
+}
 
 html,
 body {
   background-color: #000;
-  /* Force Dark Mode */
   color: #fff;
+}
+
+/* Dot Background Utilities needed for HeroHighlight */
+.bg-dot-thick-neutral-800 {
+  background-image: radial-gradient(#262626 2px, transparent 2px);
+  background-size: 32px 32px;
+}
+
+.bg-dot-thick-indigo-500 {
+  background-image: radial-gradient(#6366f1 2px, transparent 2px);
+  background-size: 32px 32px;
 }

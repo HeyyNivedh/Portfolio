@@ -1,87 +1,109 @@
 "use client";
-import { motion } from "framer-motion";
+import React from "react";
+import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
+import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { PROFILE, PROJECTS, CERTIFICATES } from "@/constants";
-import { Github, Linkedin, ExternalLink, Award } from "lucide-react";
+import { Github, Linkedin, ExternalLink, Award, Code, GraduationCap } from "lucide-react";
+import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black text-white p-8 md:p-24 selection:bg-purple-500 selection:text-white">
-      <div className="max-w-4xl mx-auto space-y-12">
-
-        {/* HERO SECTION */}
-        <section className="space-y-4">
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text"
-          >
-            {PROFILE.name}
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl text-gray-400"
-          >
+    <main className="min-h-screen bg-black antialiased selection:bg-indigo-500 selection:text-white">
+      {/* HERO SECTION */}
+      <HeroHighlight>
+        <motion.h1
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          animate={{
+            opacity: 1,
+            y: [20, -5, 0],
+          }}
+          transition={{
+            duration: 0.5,
+            ease: [0.4, 0.0, 0.2, 1],
+          }}
+          className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto "
+        >
+          Hi, I&apos;m {PROFILE.name}. <br />
+          <Highlight className="text-black dark:text-white">
             {PROFILE.title}
-          </motion.p>
-          <p className="max-w-lg text-gray-500">{PROFILE.bio}</p>
-
-          <div className="flex gap-4">
-            <a href={PROFILE.socials.github} className="p-2 bg-gray-900 rounded-full hover:bg-gray-800 transition"><Github size={20} /></a>
-            <a href={PROFILE.socials.linkedin} className="p-2 bg-gray-900 rounded-full hover:bg-blue-900 transition"><Linkedin size={20} /></a>
+          </Highlight>
+          <div className="mt-4 text-base md:text-lg font-normal text-neutral-400 max-w-lg mx-auto">
+            {PROFILE.bio}
           </div>
-        </section>
 
-        {/* PROJECTS GRID */}
-        <section>
-          <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-            <span className="text-purple-500">#</span> Projects
+          <div className="flex justify-center gap-4 mt-8">
+            <a href={PROFILE.socials.github} target="_blank" rel="noopener noreferrer" className="p-3 bg-neutral-800 rounded-full hover:bg-neutral-700 transition">
+              <Github className="w-6 h-6 text-white" />
+            </a>
+            <a href={PROFILE.socials.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 bg-blue-900/30 rounded-full hover:bg-blue-900/50 transition">
+              <Linkedin className="w-6 h-6 text-blue-400" />
+            </a>
+          </div>
+        </motion.h1>
+      </HeroHighlight>
+
+      <div className="max-w-7xl mx-auto px-4 py-20">
+
+        {/* PROJECTS SECTION */}
+        <section className="mb-20">
+          <h2 className="text-3xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
+            Featured Projects
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <BentoGrid>
             {PROJECTS.map((project, i) => (
-              <motion.div
+              <BentoGridItem
                 key={project.id}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: i * 0.1 }}
-                className="group p-6 rounded-2xl bg-zinc-900 border border-zinc-800 hover:border-purple-500/50 transition-all hover:shadow-[0_0_30px_-5px_rgba(168,85,247,0.15)]"
-              >
-                <div className="flex justify-between items-start mb-4">
-                  <h3 className="text-xl font-bold group-hover:text-purple-400 transition-colors">{project.title}</h3>
-                  <ExternalLink size={18} className="text-gray-500 group-hover:text-white" />
-                </div>
-                <p className="text-gray-400 text-sm mb-4">{project.description}</p>
-                <div className="flex gap-2 flex-wrap">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1 text-xs rounded-full bg-zinc-800 text-zinc-300 border border-zinc-700">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+                title={project.title}
+                description={
+                  <div>
+                    <span className="text-sm text-neutral-400 block mb-2">{project.description}</span>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {project.tags.map((tag) => (
+                        <span key={tag} className="px-2 py-1 text-[10px] rounded-full bg-neutral-800 border border-neutral-700 text-neutral-300">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                }
+                header={
+                  <div className="flex flex-1 w-full h-full min-h-[6rem] rounded-xl bg-gradient-to-br from-neutral-900 to-neutral-800 border border-neutral-800 p-4 relative overflow-hidden group-hover/bento:border-indigo-500/50 transition-colors">
+                    <div className="absolute right-2 top-2">
+                      <Code className="w-5 h-5 text-neutral-600 group-hover/bento:text-indigo-400 transition" />
+                    </div>
+                  </div>
+                }
+                className={i === 0 || i === 3 ? "md:col-span-2" : ""}
+                icon={<ExternalLink className="h-4 w-4 text-neutral-500" />}
+              />
             ))}
-          </div>
+          </BentoGrid>
         </section>
 
-        {/* CERTIFICATES SECTION (Bento Style) */}
+        {/* CERTIFICATES SECTION */}
         <section>
-          <h2 className="text-2xl font-semibold mb-6 flex items-center gap-2">
-            <Award className="text-pink-500" /> Certificates
+          <h2 className="text-3xl font-bold mb-10 text-center bg-clip-text text-transparent bg-gradient-to-b from-neutral-50 to-neutral-400">
+            Certifications & Awards
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {CERTIFICATES.map((cert) => (
-              <div key={cert.id} className="p-4 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:bg-zinc-900 transition text-center flex flex-col items-center justify-center gap-2">
-                <div className="w-10 h-10 rounded-full bg-gradient-to-tr from-blue-500 to-purple-500 flex items-center justify-center text-xs font-bold">
-                  {cert.issuer[0]}
+              <div key={cert.id} className="p-6 rounded-2xl bg-neutral-900 border border-neutral-800 hover:border-neutral-700 transition flex flex-col items-center text-center group">
+                <div className="w-12 h-12 rounded-full bg-neutral-800 flex items-center justify-center mb-4 group-hover:scale-110 transition duration-200">
+                  <Award className="w-6 h-6 text-yellow-500" />
                 </div>
-                <div className="text-sm font-medium">{cert.title}</div>
-                <div className="text-xs text-gray-500">{cert.issuer}</div>
+                <h3 className="font-semibold text-lg mb-1">{cert.title}</h3>
+                <p className="text-sm text-neutral-400">{cert.issuer}</p>
+                <span className="text-xs text-neutral-500 mt-2">{cert.date}</span>
               </div>
             ))}
-            {/* The "Add New" Placeholder */}
-            <div className="p-4 rounded-xl border border-dashed border-zinc-800 flex items-center justify-center text-zinc-600 text-sm">
-              + Add More
+
+            {/* Fallback / Add New */}
+            <div className="p-6 rounded-2xl border border-dashed border-neutral-800 flex flex-col items-center justify-center text-neutral-600 hover:text-neutral-400 hover:border-neutral-700 transition cursor-pointer">
+              <GraduationCap className="w-8 h-8 mb-2 opacity-50" />
+              <span className="text-sm">More coming soon...</span>
             </div>
           </div>
         </section>
