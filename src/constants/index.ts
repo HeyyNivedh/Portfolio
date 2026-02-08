@@ -1,6 +1,6 @@
 export const PROFILE = {
     name: "Nivedh Kishan",
-    title: "CSE-AI Student @ SCMS",
+    title: "Just an AI Student Trying to be a Developer",
     bio: "Building intelligent systems and exploring the frontiers of AI. S4 Student passionate about Deep Learning and Scalable Code.",
     socials: {
         github: "https://github.com/HeyyNivedh",

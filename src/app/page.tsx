@@ -57,16 +57,14 @@ export default function Home() {
                 duration: 0.5,
                 ease: [0.4, 0.0, 0.2, 1],
               }}
-              className="text-2xl px-4 md:text-4xl lg:text-5xl font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
+              className="px-4 font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
             >
-              Hi, I&apos;m {PROFILE.name}. <br />
+              <span className="font-hero text-3xl md:text-5xl lg:text-5xl block">Heyy there,</span>
+              <span className="font-hero text-3xl md:text-5xl lg:text-5xl block mt-2">{PROFILE.name} heree</span>
               <br />
-              <span className="text-black dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-purple-300 dark:from-indigo-500 dark:to-purple-500">
+              <span className="font-hero inline-block mt-4 text-xl md:text-3xl lg:text-3xl text-black dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-purple-300 dark:from-indigo-500 dark:to-purple-500">
                 {PROFILE.title}
               </span>
-              <div className="mt-4 text-base md:text-lg font-normal text-neutral-400 max-w-lg mx-auto">
-                {PROFILE.bio}
-              </div>
 
               <div className="flex justify-center gap-4 mt-8 pointer-events-auto">
                 <a href={PROFILE.socials.github} target="_blank" rel="noopener noreferrer" className="p-3 bg-neutral-800 rounded-full hover:bg-neutral-700 transition">
