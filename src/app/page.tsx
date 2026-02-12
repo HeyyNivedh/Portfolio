@@ -1,82 +1,71 @@
 "use client";
 import React from "react";
-import FluidGlass from "@/components/FluidGlass";
 import LiquidEther from "@/components/LiquidEther";
 import { BentoGrid, BentoGridItem } from "@/components/ui/bento-grid";
 import { PROFILE, PROJECTS, CERTIFICATES } from "@/constants";
 import { Github, Linkedin, ExternalLink, Award, Code, GraduationCap } from "lucide-react";
 import { motion } from "framer-motion";
+import BlurText from "@/components/BlurText";
 // import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight"; // Removed
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-black antialiased selection:bg-indigo-500 selection:text-white">
+    <main className="min-h-screen bg-transparent antialiased selection:bg-indigo-500 selection:text-white">
       {/* HERO SECTION */}
-      <div className="h-screen w-full relative">
-        <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}>
-          <LiquidEther
-            colors={['#5227FF', '#FF9FFC', '#B19EEF']}
-            mouseForce={20}
-            cursorSize={100}
-            isViscous
-            viscous={30}
-            iterationsViscous={20}
-            iterationsPoisson={20}
-            resolution={0.25}
-            isBounce={false}
-            autoDemo
-            autoSpeed={0.5}
-            autoIntensity={2.2}
-            takeoverDuration={0.25}
-            autoResumeDelay={3000}
-            autoRampDuration={0.6}
-          />
-        </div>
-        <FluidGlass
-          mode="lens"
-          showDemoContent={false}
-          lensProps={{
-            scale: 0.1,
-            ior: 1.15,
-            thickness: 5,
-            chromaticAberration: 0.1,
-            anisotropy: 0.01
-          }}
-        >
-          <div className="flex flex-col items-center justify-center h-full z-10 pointer-events-none">
-            <motion.h1
-              initial={{
-                opacity: 0,
-                y: 20,
-              }}
-              animate={{
-                opacity: 1,
-                y: [20, -5, 0],
-              }}
-              transition={{
-                duration: 0.5,
-                ease: [0.4, 0.0, 0.2, 1],
-              }}
-              className="px-4 font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto"
-            >
-              <span className="font-hero text-3xl md:text-5xl lg:text-5xl block">Heyy there,</span>
-              <span className="font-hero text-3xl md:text-5xl lg:text-5xl block mt-2">{PROFILE.name} heree</span>
-              <br />
-              <span className="font-hero inline-block mt-4 text-xl md:text-3xl lg:text-3xl text-black dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-purple-300 dark:from-indigo-500 dark:to-purple-500">
-                {PROFILE.title}
-              </span>
+      <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100vh', zIndex: 0 }}>
+        <LiquidEther
+          colors={['#5227FF', '#FF9FFC', '#B19EEF']}
+          mouseForce={20}
+          cursorSize={100}
+          isViscous
+          viscous={30}
+          iterationsViscous={20}
+          iterationsPoisson={20}
+          resolution={0.25}
+          isBounce={false}
+          autoDemo
+          autoSpeed={0.5}
+          autoIntensity={2.2}
+          takeoverDuration={0.25}
+          autoResumeDelay={3000}
+          autoRampDuration={0.6}
+        />
+      </div>
 
-              <div className="flex justify-center gap-4 mt-8 pointer-events-auto">
-                <a href={PROFILE.socials.github} target="_blank" rel="noopener noreferrer" className="p-3 bg-neutral-800 rounded-full hover:bg-neutral-700 transition">
-                  <Github className="w-6 h-6 text-white" />
-                </a>
-                <a href={PROFILE.socials.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 bg-blue-900/30 rounded-full hover:bg-blue-900/50 transition">
-                  <Linkedin className="w-6 h-6 text-blue-400" />
-                </a>
-              </div>
-            </motion.h1>
+      <div className="h-screen w-full relative z-10 flex flex-col items-center justify-center">
+        <div className="px-4 font-bold text-neutral-700 dark:text-white max-w-4xl leading-relaxed lg:leading-snug text-center mx-auto">
+          <BlurText
+            text="Heyy there,"
+            delay={500}
+            animateBy="words"
+            direction="bottom"
+            className="font-hero text-3xl md:text-5xl lg:text-5xl block mb-2"
+          />
+          <BlurText
+            text={`${PROFILE.name} heree`}
+            delay={500}
+            animateBy="words"
+            direction="bottom"
+            className="font-hero text-3xl md:text-5xl lg:text-5xl block"
+          />
+          <br />
+          <BlurText
+            text={PROFILE.title}
+            delay={500}
+            animateBy="words"
+            direction="bottom"
+            className="font-hero inline-block mt-4 text-xl md:text-3xl lg:text-3xl text-black dark:text-white bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 to-purple-300 dark:from-indigo-500 dark:to-purple-500"
+          />
+
+          <div className="flex justify-center gap-4 mt-8 pointer-events-auto">
+            <a href={PROFILE.socials.github} target="_blank" rel="noopener noreferrer" className="p-3 bg-neutral-800 rounded-full hover:bg-neutral-700 transition">
+              <Github className="w-6 h-6 text-white" />
+            </a>
+            <a href={PROFILE.socials.linkedin} target="_blank" rel="noopener noreferrer" className="p-3 bg-blue-900/30 rounded-full hover:bg-blue-900/50 transition">
+              <Linkedin className="w-6 h-6 text-blue-400" />
+            </a>
           </div>
-        </FluidGlass>
+        </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 py-20">
